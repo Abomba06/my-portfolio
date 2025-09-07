@@ -1,62 +1,29 @@
-// src/App.tsx
 import type { ReactNode } from "react";
 import {
   Box, Container, Heading, Text, Button, HStack, VStack, Link,
   SimpleGrid, Stack, Tag, Divider, IconButton, useColorMode,
-  useColorModeValue, Card, CardHeader, CardBody, List, ListItem
+  useColorModeValue, Card, CardHeader, CardBody, List, ListItem, Spacer
 } from "@chakra-ui/react";
 import { EmailIcon, ExternalLinkIcon, DownloadIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
-type Links = {
-  email: string;
-  github: string;
-  linkedin: string;
-  resume: string;
-};
+/* --- content you can customize --- */
+const LINKS = { email: "bomba.amir1@gmail.com", github: "https://github.com/your-username", linkedin: "https://www.linkedin.com/in/your-handle/", resume: "/resume.pdf" };
+const PROFILE = { name: "Amir Bomba", tagline: "CS student • Math tutor • Builder of useful automations", location: "Seattle, WA · Addis Ababa, ET" };
 
-type Project = {
-  title: string;
-  desc: string;
-  stack: string[];
-  links: { code?: string; demo?: string };
-};
-
-type Experience = {
-  company: string;
-  role: string;
-  period: string;
-  bullets: string[];
-};
-
-type Education = {
-  school: string;
-  detail: string;
-  extra?: string;
-};
-
-const LINKS: Links = {
-  email: "bomba.amir1@gmail.com",
-  github: "https://github.com/your-username",
-  linkedin: "https://www.linkedin.com/in/your-handle/",
-  resume: "/resume.pdf",
-};
-
-const PROFILE = {
-  name: "Amir Bomba",
-  tagline: "CS student • Math tutor • Builder of useful automations",
-  location: "Seattle, WA · Addis Ababa, ET",
-};
+type Project = { title: string; desc: string; stack: string[]; links: { code?: string; demo?: string } };
+type Experience = { company: string; role: string; period: string; bullets: string[] };
+type Education = { school: string; detail: string; extra?: string };
 
 const PROJECTS: Project[] = [
   { title: "Crypto Momentum Bot (Alpaca)", desc: "Multi-coin breakout bot with ATR risk, trailing stops, volatility filter, and CSV logging.", stack: ["Python","alpaca-py","Pandas"], links: { code: "https://github.com/your-username/crypto-bot" } },
-  { title: "Sheets → Live Dashboard", desc: "Converts messy Google Sheets into an auto-updating dashboard with alerts for small businesses.", stack: ["Python","Google API","Flask"], links: { code: "https://github.com/your-username/sheets-dashboard" } },
-  { title: "TutorHub (Math)", desc: "One-page site for booking sessions & sharing notes. Supports LaTeX equations.", stack: ["React","Chakra UI"], links: { code: "https://github.com/your-username/tutorhub" } },
+  { title: "Sheets → Live Dashboard", desc: "Auto-updates dashboards from messy Google Sheets with alerts.", stack: ["Python","Google API","Flask"], links: { code: "https://github.com/your-username/sheets-dashboard" } },
+  { title: "TutorHub (Math)", desc: "One-page booking site with LaTeX support for notes.", stack: ["React","Chakra UI"], links: { code: "https://github.com/your-username/tutorhub" } },
 ];
 
 const EXPERIENCE: Experience[] = [
   { company: "Hello Tractor", role: "Software Engineering Intern", period: "Summers 2023 & 2024 · Nairobi, Kenya", bullets: ["Contributed React components and internal tools in an Agile team.","Shadowed Eng Manager & CTO; shipped small features end-to-end.","Improved internal docs and team workflows."] },
-  { company: "Private Math Tutor", role: "Tutor (College Level)", period: "Summer 2025 · Seattle, WA", bullets: ["Tutored Calculus, Probability, and Linear Algebra 1-on-1.","Built personalized study plans and exam prep."] },
-  { company: "IB Computer Science Tutor", role: "Tutor", period: "Jan–Apr 2024 · Addis Ababa, Ethiopia", bullets: ["Guided students through algorithm design and Java debugging.","Mentored IA projects from concept to implementation."] },
+  { company: "Private Math Tutor", role: "Tutor (College Level)", period: "Summer 2025 · Seattle, WA", bullets: ["Tutored Calculus, Probability, and Linear Algebra one-on-one.","Built personalized study plans and exam prep."] },
+  { company: "IB Computer Science Tutor", role: "Tutor", period: "Jan–Apr 2024 · Addis Ababa, Ethiopia", bullets: ["Guided students in algorithms and Java debugging.","Mentored IA projects from concept to implementation."] },
 ];
 
 const SKILLS = ["Java","C","Python","TypeScript","JavaScript","React","HTML","CSS","Git/GitHub","Pandas","NumPy","Agile/Scrum","Higher-level Math","Problem Solving"];
@@ -66,12 +33,12 @@ const EDUCATION: Education[] = [
   { school: "International Community School of Addis Ababa", detail: "IB Diploma (2024)", extra: "HL: Math AA, Business Mgmt, CS · ISSEA captain; high-jump record (2024)" },
 ];
 
-// Typed Section component
-interface SectionProps { title: string; children: ReactNode; mb?: number; }
-function Section({ title, children, mb = 14 }: SectionProps) {
+/* --- layout helpers --- */
+interface SectionProps { title: string; children: ReactNode; mb?: number }
+function Section({ title, children, mb = 12 }: SectionProps) {
   return (
     <Box as="section" mb={mb}>
-      <Heading size="lg" mb={5}>{title}</Heading>
+      <Heading size="lg" mb={4}>{title}</Heading>
       {children}
     </Box>
   );
@@ -79,48 +46,47 @@ function Section({ title, children, mb = 14 }: SectionProps) {
 
 export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue("gray.50","gray.900");
-  const cardBg = useColorModeValue("white","gray.800");
-  const subtle = useColorModeValue("gray.600","gray.300");
+  const subtle = useColorModeValue("subtle", "subtle");
+  const surface = useColorModeValue("surface", "surface");
+  const border = useColorModeValue("border", "border");
 
   return (
-    <Box bg={bg} minH="100vh">
-      <Container maxW="6xl" py={{ base: 8, md: 12 }}>
-        {/* Hero */}
-        <HStack justify="space-between" mb={8}>
+    <Box minH="100vh">
+      <Container maxW="2xl" py={{ base: 8, md: 10 }}>
+        {/* Header */}
+        <HStack mb={6}>
           <VStack align="start" spacing={1}>
-            <Heading size={{ base: "xl", md: "2xl" }}>{PROFILE.name}</Heading>
+            <Heading size="2xl" lineHeight={1.1}>{PROFILE.name}</Heading>
             <Text color={subtle}>{PROFILE.tagline}</Text>
             <Text fontSize="sm" color={subtle}>{PROFILE.location}</Text>
           </VStack>
-          <IconButton aria-label="Toggle color mode"
-            icon={colorMode === "light" ? <MoonIcon/> : <SunIcon/>}
-            onClick={toggleColorMode} variant="ghost" />
+          <Spacer />
+          <IconButton aria-label="Toggle color mode" icon={colorMode === "light" ? <MoonIcon/> : <SunIcon/>} onClick={toggleColorMode} variant="ghost" />
         </HStack>
 
-        <HStack spacing={3} mb={10} flexWrap="wrap">
-          <Button as={Link} href={`mailto:${LINKS.email}`} leftIcon={<EmailIcon/>} colorScheme="blue">Email</Button>
-          <Button as={Link} href={LINKS.github} isExternal>GitHub <ExternalLinkIcon ml={2}/></Button>
-          <Button as={Link} href={LINKS.linkedin} isExternal>LinkedIn <ExternalLinkIcon ml={2}/></Button>
-          <Button as={Link} href={LINKS.resume} leftIcon={<DownloadIcon/>} variant="outline">Resume</Button>
+        <HStack spacing={3} mb={8} flexWrap="wrap">
+          <Button as={Link} href={`mailto:${LINKS.email}`} leftIcon={<EmailIcon/>} colorScheme="blue" size="sm">Email</Button>
+          <Button as={Link} href={LINKS.github} isExternal size="sm">GitHub <ExternalLinkIcon ml={2}/></Button>
+          <Button as={Link} href={LINKS.linkedin} isExternal size="sm">LinkedIn <ExternalLinkIcon ml={2}/></Button>
+          <Button as={Link} href={LINKS.resume} leftIcon={<DownloadIcon/>} variant="outline" size="sm">Resume</Button>
         </HStack>
 
-        <Divider mb={10} />
+        <Divider borderColor={border} mb={8} />
 
         {/* Projects */}
         <Section title="Projects">
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
             {PROJECTS.map((p) => (
-              <Card key={p.title} bg={cardBg} shadow="sm" borderWidth="1px">
-                <CardHeader>
+              <Card key={p.title} bg={surface}>
+                <CardHeader pb={2}>
                   <Heading size="md">{p.title}</Heading>
                   <Text mt={1} fontSize="sm" color={subtle}>{p.desc}</Text>
                 </CardHeader>
                 <CardBody pt={0}>
-                  <HStack spacing={2} mb={4} flexWrap="wrap">
+                  <HStack spacing={2} mb={3} flexWrap="wrap">
                     {p.stack.map((s) => <Tag key={s} size="sm" variant="subtle">{s}</Tag>)}
                   </HStack>
-                  <HStack spacing={4}>
+                  <HStack spacing={3}>
                     {p.links.code && <Button as={Link} href={p.links.code} isExternal size="sm">Code <ExternalLinkIcon ml={2}/></Button>}
                     {p.links.demo && <Button as={Link} href={p.links.demo} isExternal variant="outline" size="sm">Live Demo <ExternalLinkIcon ml={2}/></Button>}
                   </HStack>
@@ -132,17 +98,17 @@ export default function App() {
 
         {/* Experience & Skills */}
         <Section title="Experience & Skills">
-          <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={6}>
+          <SimpleGrid columns={{ base: 1, lg: 3 }} spacing={5}>
             <Box gridColumn={{ lg: "span 2" }}>
-              <Stack spacing={5}>
+              <Stack spacing={4}>
                 {EXPERIENCE.map((e) => (
-                  <Card key={`${e.company}-${e.role}`} bg={cardBg} shadow="sm" borderWidth="1px">
-                    <CardHeader pb={0}>
+                  <Card key={`${e.company}-${e.role}`} bg={surface}>
+                    <CardHeader pb={1}>
                       <Heading size="md">{e.role} — {e.company}</Heading>
                       <Text mt={1} fontSize="sm" color={subtle}>{e.period}</Text>
                     </CardHeader>
-                    <CardBody>
-                      <List spacing={2} styleType="disc" pl={5}>
+                    <CardBody pt={2}>
+                      <List spacing={1.5} styleType="disc" pl={5}>
                         {e.bullets.map((b) => <ListItem key={b}>{b}</ListItem>)}
                       </List>
                     </CardBody>
@@ -151,12 +117,12 @@ export default function App() {
               </Stack>
             </Box>
 
-            <Card bg={cardBg} shadow="sm" borderWidth="1px">
-              <CardHeader pb={0}>
+            <Card bg={surface}>
+              <CardHeader pb={1}>
                 <Heading size="md">Skills</Heading>
                 <Text mt={1} fontSize="sm" color={subtle}>Languages, tools & strengths</Text>
               </CardHeader>
-              <CardBody>
+              <CardBody pt={2}>
                 <HStack spacing={2} flexWrap="wrap">
                   {SKILLS.map((s) => <Tag key={s} size="sm" variant="subtle">{s}</Tag>)}
                 </HStack>
@@ -166,15 +132,15 @@ export default function App() {
         </Section>
 
         {/* Education */}
-        <Section title="Education" mb={10}>
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+        <Section title="Education">
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
             {EDUCATION.map((ed) => (
-              <Card key={ed.school} bg={cardBg} shadow="sm" borderWidth="1px">
-                <CardHeader pb={0}>
+              <Card key={ed.school} bg={surface}>
+                <CardHeader pb={1}>
                   <Heading size="md">{ed.school}</Heading>
                   <Text mt={1} fontSize="sm" color={subtle}>{ed.detail}</Text>
                 </CardHeader>
-                <CardBody>
+                <CardBody pt={2}>
                   <Text fontSize="sm" color={subtle}>{ed.extra}</Text>
                 </CardBody>
               </Card>
@@ -182,8 +148,8 @@ export default function App() {
           </SimpleGrid>
         </Section>
 
-        <Divider mb={8} />
-        <VStack spacing={2} align="start">
+        <Divider borderColor={border} my={8} />
+        <VStack spacing={1} align="start" pb={10}>
           <Text fontSize="sm" color={subtle}>© {new Date().getFullYear()} {PROFILE.name}. All rights reserved.</Text>
           <HStack spacing={4}>
             <Link href={`mailto:${LINKS.email}`}>Email</Link>
