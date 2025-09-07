@@ -1,11 +1,11 @@
 // src/App.tsx
+import type { ReactNode } from "react";
 import {
   Box, Container, Heading, Text, Button, HStack, VStack, Link,
   SimpleGrid, Stack, Tag, Divider, IconButton, useColorMode,
   useColorModeValue, Card, CardHeader, CardBody, List, ListItem
 } from "@chakra-ui/react";
 import { EmailIcon, ExternalLinkIcon, DownloadIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
-import type { ReactNode } from "react";
 
 type Links = {
   email: string;
@@ -48,30 +48,26 @@ const PROFILE = {
 };
 
 const PROJECTS: Project[] = [
-  { title: "Crypto Momentum Bot (Alpaca)", desc: "Multi-coin breakout bot with ATR risk, trailing stops, volatility filter, and CSV logging.", stack: ["Python", "alpaca-py", "Pandas"], links: { code: "https://github.com/your-username/crypto-bot" } },
-  { title: "Sheets → Live Dashboard", desc: "Converts messy Google Sheets into an auto-updating dashboard with alerts for small businesses.", stack: ["Python", "Google API", "Flask"], links: { code: "https://github.com/your-username/sheets-dashboard" } },
-  { title: "TutorHub (Math)", desc: "One-page site for booking sessions & sharing notes. Supports LaTeX rendering for equations.", stack: ["React", "Chakra UI"], links: { code: "https://github.com/your-username/tutorhub" } },
+  { title: "Crypto Momentum Bot (Alpaca)", desc: "Multi-coin breakout bot with ATR risk, trailing stops, volatility filter, and CSV logging.", stack: ["Python","alpaca-py","Pandas"], links: { code: "https://github.com/your-username/crypto-bot" } },
+  { title: "Sheets → Live Dashboard", desc: "Converts messy Google Sheets into an auto-updating dashboard with alerts for small businesses.", stack: ["Python","Google API","Flask"], links: { code: "https://github.com/your-username/sheets-dashboard" } },
+  { title: "TutorHub (Math)", desc: "One-page site for booking sessions & sharing notes. Supports LaTeX equations.", stack: ["React","Chakra UI"], links: { code: "https://github.com/your-username/tutorhub" } },
 ];
 
 const EXPERIENCE: Experience[] = [
-  { company: "Hello Tractor", role: "Software Engineering Intern", period: "Summers 2023 & 2024 · Nairobi, Kenya", bullets: ["Contributed React components and internal tools in an Agile team.", "Shadowed Eng Manager & CTO; shipped small features end-to-end.", "Improved internal docs and team workflows."] },
-  { company: "Private Math Tutor", role: "Tutor (College Level)", period: "Summer 2025 · Seattle, WA", bullets: ["Tutored Calculus, Probability, and Linear Algebra 1-on-1.", "Built personalized study plans and exam prep."] },
-  { company: "IB Computer Science Tutor", role: "Tutor", period: "Jan–Apr 2024 · Addis Ababa, Ethiopia", bullets: ["Guided students through algorithm design and Java debugging.", "Mentored IA projects from concept to implementation."] },
+  { company: "Hello Tractor", role: "Software Engineering Intern", period: "Summers 2023 & 2024 · Nairobi, Kenya", bullets: ["Contributed React components and internal tools in an Agile team.","Shadowed Eng Manager & CTO; shipped small features end-to-end.","Improved internal docs and team workflows."] },
+  { company: "Private Math Tutor", role: "Tutor (College Level)", period: "Summer 2025 · Seattle, WA", bullets: ["Tutored Calculus, Probability, and Linear Algebra 1-on-1.","Built personalized study plans and exam prep."] },
+  { company: "IB Computer Science Tutor", role: "Tutor", period: "Jan–Apr 2024 · Addis Ababa, Ethiopia", bullets: ["Guided students through algorithm design and Java debugging.","Mentored IA projects from concept to implementation."] },
 ];
 
 const SKILLS = ["Java","C","Python","TypeScript","JavaScript","React","HTML","CSS","Git/GitHub","Pandas","NumPy","Agile/Scrum","Higher-level Math","Problem Solving"];
 
 const EDUCATION: Education[] = [
   { school: "Temple University", detail: "B.S. Computer Science (in progress)", extra: "Coursework: Data Structures, Algorithms, Probability/Statistics, Physics" },
-  { school: "International Community School of Addis Ababa", detail: "IB Diploma (2024)", extra: "HL: Math AA, Business Mgmt, Computer Science · ISSEA captain; high-jump record (2024)" },
+  { school: "International Community School of Addis Ababa", detail: "IB Diploma (2024)", extra: "HL: Math AA, Business Mgmt, CS · ISSEA captain; high-jump record (2024)" },
 ];
 
-// ---- typed Section component ----
-interface SectionProps {
-  title: string;
-  children: ReactNode;
-  mb?: number;
-}
+// Typed Section component
+interface SectionProps { title: string; children: ReactNode; mb?: number; }
 function Section({ title, children, mb = 14 }: SectionProps) {
   return (
     <Box as="section" mb={mb}>
@@ -83,9 +79,9 @@ function Section({ title, children, mb = 14 }: SectionProps) {
 
 export default function App() {
   const { colorMode, toggleColorMode } = useColorMode();
-  const bg = useColorModeValue("gray.50", "gray.900");
-  const cardBg = useColorModeValue("white", "gray.800");
-  const subtle = useColorModeValue("gray.600", "gray.300");
+  const bg = useColorModeValue("gray.50","gray.900");
+  const cardBg = useColorModeValue("white","gray.800");
+  const subtle = useColorModeValue("gray.600","gray.300");
 
   return (
     <Box bg={bg} minH="100vh">
@@ -97,19 +93,16 @@ export default function App() {
             <Text color={subtle}>{PROFILE.tagline}</Text>
             <Text fontSize="sm" color={subtle}>{PROFILE.location}</Text>
           </VStack>
-          <IconButton
-            aria-label="Toggle color mode"
-            icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-            onClick={toggleColorMode}
-            variant="ghost"
-          />
+          <IconButton aria-label="Toggle color mode"
+            icon={colorMode === "light" ? <MoonIcon/> : <SunIcon/>}
+            onClick={toggleColorMode} variant="ghost" />
         </HStack>
 
         <HStack spacing={3} mb={10} flexWrap="wrap">
-          <Button as={Link} href={`mailto:${LINKS.email}`} leftIcon={<EmailIcon />} colorScheme="blue">Email</Button>
+          <Button as={Link} href={`mailto:${LINKS.email}`} leftIcon={<EmailIcon/>} colorScheme="blue">Email</Button>
           <Button as={Link} href={LINKS.github} isExternal>GitHub <ExternalLinkIcon ml={2}/></Button>
           <Button as={Link} href={LINKS.linkedin} isExternal>LinkedIn <ExternalLinkIcon ml={2}/></Button>
-          <Button as={Link} href={LINKS.resume} leftIcon={<DownloadIcon />} variant="outline">Resume</Button>
+          <Button as={Link} href={LINKS.resume} leftIcon={<DownloadIcon/>} variant="outline">Resume</Button>
         </HStack>
 
         <Divider mb={10} />
@@ -190,8 +183,6 @@ export default function App() {
         </Section>
 
         <Divider mb={8} />
-
-        {/* Footer */}
         <VStack spacing={2} align="start">
           <Text fontSize="sm" color={subtle}>© {new Date().getFullYear()} {PROFILE.name}. All rights reserved.</Text>
           <HStack spacing={4}>
