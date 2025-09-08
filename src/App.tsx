@@ -1,17 +1,42 @@
 // src/App.tsx
 import type { ReactNode } from "react";
 import {
-  Box, Container, Heading, Text, Button, HStack, VStack, Link,
-  SimpleGrid, Stack, Tag, Divider, IconButton, useColorMode,
-  useColorModeValue, Card, CardHeader, CardBody, List, ListItem, Spacer
+  Box,
+  Container,
+  Heading,
+  Text,
+  Button,
+  HStack,
+  VStack,
+  Link,
+  SimpleGrid,
+  Stack,
+  Tag,
+  Divider,
+  IconButton,
+  useColorMode,
+  useColorModeValue,
+  Card,
+  CardHeader,
+  CardBody,
+  List,
+  ListItem,
+  Spacer,
+  Flex,
 } from "@chakra-ui/react";
-import { EmailIcon, ExternalLinkIcon, DownloadIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
+import {
+  EmailIcon,
+  ExternalLinkIcon,
+  DownloadIcon,
+  MoonIcon,
+  SunIcon,
+} from "@chakra-ui/icons";
 
 /* ---------- Content (edit me) ---------- */
 const LINKS = {
   email: "bomba.amir1@gmail.com",
-  github: "https://github.com/your-username",
-  linkedin: "https://www.linkedin.com/in/your-handle/",
+  github: "https://github.com/Abomba06",
+  linkedin: "https://www.linkedin.com/in/amir-bomba-7b749331a/",
   resume: "/resume.pdf",
 };
 
@@ -21,8 +46,18 @@ const PROFILE = {
   location: "Seattle, WA · Addis Ababa, ET",
 };
 
-type Project = { title: string; desc: string; stack: string[]; links: { code?: string; demo?: string } };
-type Experience = { company: string; role: string; period: string; bullets: string[] };
+type Project = {
+  title: string;
+  desc: string;
+  stack: string[];
+  links: { code?: string; demo?: string };
+};
+type Experience = {
+  company: string;
+  role: string;
+  period: string;
+  bullets: string[];
+};
 type Education = { school: string; detail: string; extra?: string };
 
 const PROJECTS: Project[] = [
@@ -78,29 +113,50 @@ const EXPERIENCE: Experience[] = [
 ];
 
 const SKILLS = [
-  "Java","C","Python","TypeScript","JavaScript","React","HTML","CSS","Git/GitHub",
-  "Pandas","NumPy","Agile/Scrum","Higher-level Math","Problem Solving"
+  "Java",
+  "C",
+  "Python",
+  "TypeScript",
+  "JavaScript",
+  "React",
+  "HTML",
+  "CSS",
+  "Git/GitHub",
+  "Pandas",
+  "NumPy",
+  "Agile/Scrum",
+  "Higher-level Math",
+  "Problem Solving",
 ];
 
 const EDUCATION: Education[] = [
   {
     school: "Temple University",
     detail: "B.S. Computer Science (in progress)",
-    extra: "Coursework: Data Structures, Algorithms, Probability/Statistics, Physics",
+    extra:
+      "Coursework: Data Structures, Algorithms, Probability/Statistics, Physics",
   },
   {
     school: "International Community School of Addis Ababa",
     detail: "IB Diploma (2024)",
-    extra: "HL: Math AA, Business Mgmt, CS · ISSEA captain; high-jump record (2024)",
+    extra:
+      "HL: Math AA, Business Mgmt, CS · ISSEA captain; high-jump record (2024)",
   },
 ];
 
 /* ---------- Layout helpers ---------- */
-interface SectionProps { title: string; children: ReactNode; mt?: number; mb?: number }
+interface SectionProps {
+  title: string;
+  children: ReactNode;
+  mt?: number;
+  mb?: number;
+}
 function Section({ title, children, mt = 16, mb = 8 }: SectionProps) {
   return (
     <Box as="section" mt={mt} mb={mb}>
-      <Heading size="lg" mb={6}>{title}</Heading>
+      <Heading size="lg" mb={6}>
+        {title}
+      </Heading>
       {children}
     </Box>
   );
@@ -114,34 +170,52 @@ export default function App() {
 
   return (
     <Box minH="100vh">
-      <Container maxW="2xl" py={{ base: 8, md: 10 }}>
+      <Container maxW="6xl" py={{ base: 8, md: 10 }}>
         {/* Header / Hero */}
         <HStack align="start" mb={6}>
           <VStack align="start" spacing={1}>
-            <Heading size="2xl" lineHeight={1.1}>{PROFILE.name}</Heading>
-            <Text fontSize="lg" color={subtle}>{PROFILE.tagline}</Text>
-            <Text fontSize="sm" color={subtle}>{PROFILE.location}</Text>
+            <Heading size="2xl" lineHeight={1.1}>
+              {PROFILE.name}
+            </Heading>
+            <Text fontSize="lg" color={subtle}>
+              {PROFILE.tagline}
+            </Text>
+            <Text fontSize="sm" color={subtle}>
+              {PROFILE.location}
+            </Text>
           </VStack>
           <Spacer />
           <IconButton
             aria-label="Toggle color mode"
-            icon={colorMode === "light" ? <MoonIcon/> : <SunIcon/>}
+            icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
             onClick={toggleColorMode}
             variant="ghost"
           />
         </HStack>
 
         <HStack spacing={3} mb={10} flexWrap="wrap">
-          <Button as={Link} href={`mailto:${LINKS.email}`} leftIcon={<EmailIcon/>} colorScheme="blue" size="sm">
+          <Button
+            as={Link}
+            href={`mailto:${LINKS.email}`}
+            leftIcon={<EmailIcon />}
+            colorScheme="blue"
+            size="sm"
+          >
             Email
           </Button>
           <Button as={Link} href={LINKS.github} isExternal size="sm">
-            GitHub <ExternalLinkIcon ml={2}/>
+            GitHub <ExternalLinkIcon ml={2} />
           </Button>
           <Button as={Link} href={LINKS.linkedin} isExternal size="sm">
-            LinkedIn <ExternalLinkIcon ml={2}/>
+            LinkedIn <ExternalLinkIcon ml={2} />
           </Button>
-          <Button as={Link} href={LINKS.resume} leftIcon={<DownloadIcon/>} variant="outline" size="sm">
+          <Button
+            as={Link}
+            href={LINKS.resume}
+            leftIcon={<DownloadIcon />}
+            variant="outline"
+            size="sm"
+          >
             Resume
           </Button>
         </HStack>
@@ -150,7 +224,7 @@ export default function App() {
 
         {/* Projects */}
         <Section title="Projects">
-          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
+          <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} spacing={5}>
             {PROJECTS.map((p) => (
               <Card
                 key={p.title}
@@ -160,27 +234,46 @@ export default function App() {
                 borderColor={border}
                 rounded="xl"
                 transition="all .2s ease"
-                _hover={{ transform: "translateY(-2px)", shadow: "md", borderColor: useColorModeValue("gray.300","gray.600") }}
+                _hover={{
+                  transform: "translateY(-2px)",
+                  shadow: "md",
+                  borderColor: useColorModeValue("gray.300", "gray.600"),
+                }}
               >
                 <CardHeader pb={2}>
                   <Heading size="md">{p.title}</Heading>
-                  <Text mt={1} fontSize="sm" color={subtle}>{p.desc}</Text>
+                  <Text mt={1} fontSize="sm" color={subtle}>
+                    {p.desc}
+                  </Text>
                 </CardHeader>
                 <CardBody pt={0}>
                   <HStack spacing={2} mb={3} flexWrap="wrap">
                     {p.stack.map((s) => (
-                      <Tag key={s} size="sm" variant="subtle">{s}</Tag>
+                      <Tag key={s} size="sm" variant="subtle">
+                        {s}
+                      </Tag>
                     ))}
                   </HStack>
                   <HStack spacing={3}>
                     {p.links.code && (
-                      <Button as={Link} href={p.links.code} isExternal size="sm">
-                        Code <ExternalLinkIcon ml={2}/>
+                      <Button
+                        as={Link}
+                        href={p.links.code}
+                        isExternal
+                        size="sm"
+                      >
+                        Code <ExternalLinkIcon ml={2} />
                       </Button>
                     )}
                     {p.links.demo && (
-                      <Button as={Link} href={p.links.demo} isExternal variant="outline" size="sm">
-                        Live Demo <ExternalLinkIcon ml={2}/>
+                      <Button
+                        as={Link}
+                        href={p.links.demo}
+                        isExternal
+                        variant="outline"
+                        size="sm"
+                      >
+                        Live Demo <ExternalLinkIcon ml={2} />
                       </Button>
                     )}
                   </HStack>
@@ -204,12 +297,18 @@ export default function App() {
                     rounded="xl"
                   >
                     <CardHeader pb={1}>
-                      <Heading size="md">{e.role} — {e.company}</Heading>
-                      <Text mt={1} fontSize="sm" color={subtle}>{e.period}</Text>
+                      <Heading size="md">
+                        {e.role} — {e.company}
+                      </Heading>
+                      <Text mt={1} fontSize="sm" color={subtle}>
+                        {e.period}
+                      </Text>
                     </CardHeader>
                     <CardBody pt={2}>
                       <List spacing={1.5} styleType="disc" pl={5}>
-                        {e.bullets.map((b) => <ListItem key={b}>{b}</ListItem>)}
+                        {e.bullets.map((b) => (
+                          <ListItem key={b}>{b}</ListItem>
+                        ))}
                       </List>
                     </CardBody>
                   </Card>
@@ -217,15 +316,24 @@ export default function App() {
               </Stack>
             </Box>
 
-            <Card bg={surface} borderWidth="1px" borderColor={border} rounded="xl">
+            <Card
+              bg={surface}
+              borderWidth="1px"
+              borderColor={border}
+              rounded="xl"
+            >
               <CardHeader pb={1}>
                 <Heading size="md">Skills</Heading>
-                <Text mt={1} fontSize="sm" color={subtle}>Languages, tools & strengths</Text>
+                <Text mt={1} fontSize="sm" color={subtle}>
+                  Languages, tools & strengths
+                </Text>
               </CardHeader>
               <CardBody pt={2}>
                 <HStack spacing={2} flexWrap="wrap">
                   {SKILLS.map((s) => (
-                    <Tag key={s} size="sm" variant="subtle">{s}</Tag>
+                    <Tag key={s} size="sm" variant="subtle">
+                      {s}
+                    </Tag>
                   ))}
                 </HStack>
               </CardBody>
@@ -237,13 +345,23 @@ export default function App() {
         <Section title="Education">
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={5}>
             {EDUCATION.map((ed) => (
-              <Card key={ed.school} bg={surface} borderWidth="1px" borderColor={border} rounded="xl">
+              <Card
+                key={ed.school}
+                bg={surface}
+                borderWidth="1px"
+                borderColor={border}
+                rounded="xl"
+              >
                 <CardHeader pb={1}>
                   <Heading size="md">{ed.school}</Heading>
-                  <Text mt={1} fontSize="sm" color={subtle}>{ed.detail}</Text>
+                  <Text mt={1} fontSize="sm" color={subtle}>
+                    {ed.detail}
+                  </Text>
                 </CardHeader>
                 <CardBody pt={2}>
-                  <Text fontSize="sm" color={subtle}>{ed.extra}</Text>
+                  <Text fontSize="sm" color={subtle}>
+                    {ed.extra}
+                  </Text>
                 </CardBody>
               </Card>
             ))}
@@ -259,8 +377,12 @@ export default function App() {
           </Text>
           <HStack spacing={4}>
             <Link href={`mailto:${LINKS.email}`}>Email</Link>
-            <Link href={LINKS.github} isExternal>GitHub</Link>
-            <Link href={LINKS.linkedin} isExternal>LinkedIn</Link>
+            <Link href={LINKS.github} isExternal>
+              GitHub
+            </Link>
+            <Link href={LINKS.linkedin} isExternal>
+              LinkedIn
+            </Link>
           </HStack>
         </VStack>
       </Container>
