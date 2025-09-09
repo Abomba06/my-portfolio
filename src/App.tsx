@@ -84,7 +84,7 @@ const EXPERIENCE: Experience[] = [
   {
     company: "Hello Tractor",
     role: "Software Engineering Intern",
-    period: "Summers 2023 & 2024 · Nairobi, Kenya",
+    period: "Summers 2024 & 2025 · Nairobi, Kenya",
     bullets: [
       "Contributed React components and internal tools in an Agile team.",
       "Shadowed Eng Manager & CTO; shipped small features end-to-end.",
